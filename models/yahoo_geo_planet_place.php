@@ -51,8 +51,10 @@ class YahooGeoPlanetPlace extends YahooGeoPlanetAppModel {
    * for more information go to
    * http://developer.yahoo.com/geo/geoplanet/guide/api_docs.html#filters
    *
-   * view key can have value either 'short' or 'long' (default) and determines
+   * Query parameters:
+   * - view : can have value either 'short' or 'long' (default) and determines
    * the format of the results.
+   * - lang : return names in specified language (RFC 4646)
    *
    * @param string $state 'before' or 'after'
    * @param array $query The query options passed to the Model::find() call
@@ -137,6 +139,10 @@ class YahooGeoPlanetPlace extends YahooGeoPlanetAppModel {
       if (isset($query['view']) && in_array($query['view'], array('short', 'long'))) {
         $this->request['uri']['query']['view'] = $query['view'];
       }
+	  
+	  if (isset($query['lang'])) {
+        $this->request['uri']['query']['lang'] = $query['lang'];
+      }
 
       return $query;
       
@@ -162,8 +168,10 @@ class YahooGeoPlanetPlace extends YahooGeoPlanetAppModel {
    * Conditions can include
    * - woeid : an integer corresponding to Where On Earth IDs (WEOIDs)
    *
-   * view/select keys can have value either 'short' or 'long' (default) and
-   * determine the format of the results.
+   * Query parameters:
+   * - view : can have value either 'short' or 'long' (default) and determines
+   * the format of the results.
+   * - lang : return names in specified language (RFC 4646).
    *
    * @param string $state 'before' or 'after'
    * @param array $query The query options passed to the Model::find() call
@@ -184,6 +192,10 @@ class YahooGeoPlanetPlace extends YahooGeoPlanetAppModel {
       // Extra parameters
       if (isset($query['view']) && in_array($query['view'], array('short', 'long'))) {
         $this->request['uri']['query']['view'] = $query['view'];
+      }
+	  
+	  if (isset($query['lang'])) {
+        $this->request['uri']['query']['lang'] = $query['lang'];
       }
 
       return $query;
